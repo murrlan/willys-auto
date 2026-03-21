@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-forest: #1A3320;
+  --color-teal: #0F2D2D;
+  --color-accent: #C9913A;
+  --color-cream: #F8F5F0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Barlow', system-ui, sans-serif;
+  background-color: var(--color-cream);
+}
