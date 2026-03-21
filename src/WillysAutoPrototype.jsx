@@ -159,7 +159,7 @@ export default function WillysAutoPrototype() {
           </div>
           <div className="flex-1 w-full max-w-xl lg:max-w-none">
             <img
-              src="/storefront.png"
+              src={`${import.meta.env.BASE_URL}storefront.png`}
               alt="Willy's Auto storefront on Mount Ave, Missoula"
               className="w-full rounded-lg shadow-xl object-cover aspect-[4/3]"
             />
