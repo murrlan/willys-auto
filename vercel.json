@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/videos", "destination": "/" },
+    { "source": "/videos/:path*", "destination": "/" }
+  ]
+}
