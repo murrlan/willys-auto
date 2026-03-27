@@ -11,20 +11,53 @@ function extractVideoId(url) {
 
 function TikTokCard({ url, isVisible }) {
   const videoId = extractVideoId(url);
+  const [embedUnavailable, setEmbedUnavailable] = useState(false);
+  const embedRef = useRef(null);
+
+  useEffect(() => {
+    if (!isVisible) {
+      return;
+    }
+
+    const timeout = window.setTimeout(() => {
+      const hasIframe = Boolean(embedRef.current?.querySelector('iframe'));
+      if (!hasIframe) {
+        setEmbedUnavailable(true);
+      }
+    }, 8000);
+
+    return () => window.clearTimeout(timeout);
+  }, [isVisible, url]);
 
   if (!videoId) {
     return null;
   }
 
   return (
-    <div className="rounded-lg bg-white border border-[#1A3320]/10 p-2">
-      {isVisible ? (
+    <div className="rounded-lg bg-white border border-[#1A3320]/10 p-2" ref={embedRef}>
+      {!isVisible && (
+        <div className="aspect-[9/16] flex items-center justify-center rounded bg-[#1A3320] text-[#F8F5F0]/80">
+          Loading video...
+        </div>
+      )}
+
+      {isVisible && !embedUnavailable && (
         <blockquote className="tiktok-embed" cite={url} data-video-id={videoId}>
           <section />
         </blockquote>
-      ) : (
-        <div className="aspect-[9/16] flex items-center justify-center rounded bg-[#1A3320] text-[#F8F5F0]/80">
-          Loading video...
+      )}
+
+      {isVisible && embedUnavailable && (
+        <div className="aspect-[9/16] flex flex-col items-center justify-center gap-3 rounded bg-[#1A3320] px-4 text-center text-[#F8F5F0]/90">
+          <p className="font-medium">This TikTok is currently unavailable.</p>
+          <a
+            href={url}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center justify-center rounded border border-[#C9913A] px-4 py-2 text-sm font-semibold text-[#C9913A] hover:bg-[#C9913A] hover:text-[#1A3320] transition-colors"
+          >
+            Open on TikTok
+          </a>
         </div>
       )}
     </div>
