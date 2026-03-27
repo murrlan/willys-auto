@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import TikTokGallery from './components/TikTokGallery.jsx';
 
 const SERVICES = [
   'Engine diagnostics and repair',
@@ -67,7 +68,13 @@ export default function WillysAutoPrototype() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navLinks = ['Services', 'About', 'Reviews', 'Contact'];
+  const navLinks = [
+    { label: 'Services', href: '#services' },
+    { label: 'About', href: '#about' },
+    { label: 'Reviews', href: '#reviews' },
+    { label: 'Videos', href: '#tiktok-gallery' },
+    { label: 'Contact', href: '#contact' },
+  ];
   const handleNavClick = () => setMobileMenuOpen(false);
 
   return (
@@ -85,11 +92,11 @@ export default function WillysAutoPrototype() {
           <div className="hidden md:flex gap-8">
             {navLinks.map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                key={item.label}
+                href={item.href}
                 className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors"
               >
-                {item}
+                {item.label}
               </a>
             ))}
           </div>
@@ -114,12 +121,12 @@ export default function WillysAutoPrototype() {
           <div className="md:hidden bg-[#1A3320] border-t border-[#C9913A]/30 px-6 py-4">
             {navLinks.map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                key={item.label}
+                href={item.href}
                 onClick={handleNavClick}
                 className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors"
               >
-                {item}
+                {item.label}
               </a>
             ))}
           </div>
@@ -280,6 +287,8 @@ export default function WillysAutoPrototype() {
           </div>
         </div>
       </section>
+
+      <TikTokGallery />
 
       {/* Contact / Footer */}
       <footer id="contact" className="py-16 px-6 bg-[#1A3320] text-[#F8F5F0]">
