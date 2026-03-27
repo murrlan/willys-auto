@@ -126,13 +126,7 @@ export default function WillysAutoVideos() {
         )}
       </nav>
 
-      <section className="px-6 pt-28 pb-10 bg-[#1A3320] text-[#F8F5F0]">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold mb-3">Willy's Auto Social Media</h1>
-        </div>
-      </section>
-
-      <section className="px-6 py-8">
+      <section className="px-6 pt-28 pb-8">
         <div className="max-w-6xl mx-auto grid grid-cols-1 xl:grid-cols-2 gap-6">
           <article className="rounded-xl border border-[#1A3320]/10 bg-white p-4 md:p-5 shadow-sm">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
