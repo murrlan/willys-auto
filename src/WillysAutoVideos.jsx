@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 const TIKTOK_VIDEO_URLS = [
   'https://www.tiktok.com/@willysauto664/video/7557373941895941406',
@@ -30,41 +30,77 @@ const TIKTOK_VIDEO_URLS = [
   'https://www.tiktok.com/@willysauto664/video/7211926409046936874',
 ];
 
-const FACEBOOK_PAGE_URL = 'https://www.facebook.com/bestmechanicintown/';
-
 function extractVideoId(url) {
   const match = url.match(/\/video\/(\d+)/);
   return match ? match[1] : null;
 }
 
-function buildFacebookPluginUrl(tab) {
-  const encodedPage = encodeURIComponent(FACEBOOK_PAGE_URL);
-  return `https://www.facebook.com/plugins/page.php?href=${encodedPage}&tabs=${tab}&width=500&height=760&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true`;
-}
+function TikTokCard({ video }) {
+  const cardRef = useRef(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
 
-function IconButton({ label, onClick, children }) {
+  useEffect(() => {
+    if (shouldLoad || !cardRef.current) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '300px 0px' },
+    );
+
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, [shouldLoad]);
+
   return (
-    <button
-      type="button"
-      aria-label={label}
-      onClick={onClick}
-      className="h-10 w-10 rounded border border-[#1A3320]/25 text-[#1A3320] hover:border-[#C9913A] hover:text-[#C9913A] transition-colors"
-    >
-      {children}
-    </button>
+    <div ref={cardRef} className="rounded-lg border border-[#1A3320]/10 overflow-hidden bg-[#1A3320]/5">
+      {shouldLoad ? (
+        <iframe
+          title={`TikTok video ${video.id}`}
+          src={`https://www.tiktok.com/embed/v2/${video.id}`}
+          width="100%"
+          height="100%"
+          className="h-[520px]"
+          loading="lazy"
+          style={{ border: 'none' }}
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowFullScreen
+        />
+      ) : (
+        <div className="h-[520px] flex items-center justify-center text-[#1A3320]/70 bg-white">
+          Loading video...
+        </div>
+      )}
+      <div className="px-3 py-2 bg-white border-t border-[#1A3320]/10">
+        <a
+          href={video.url}
+          target="_blank"
+          rel="noreferrer"
+          className="text-sm font-semibold text-[#1A3320] hover:text-[#C9913A] transition-colors"
+        >
+          Open on TikTok
+        </a>
+      </div>
+    </div>
   );
 }
 
 export default function WillysAutoVideos() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [tikTokIndex, setTikTokIndex] = useState(0);
-
-  const currentTikTokUrl = TIKTOK_VIDEO_URLS[tikTokIndex];
-  const currentTikTokId = extractVideoId(currentTikTokUrl);
-  const currentTikTokEmbedUrl = currentTikTokId ? `https://www.tiktok.com/embed/v2/${currentTikTokId}` : null;
-
-  const facebookFeedUrl = useMemo(() => buildFacebookPluginUrl('timeline,videos'), []);
+  const [visibleCount, setVisibleCount] = useState(4);
+  const tikTokEmbeds = useMemo(
+    () => TIKTOK_VIDEO_URLS.map((url) => ({ url, id: extractVideoId(url) })).filter((video) => video.id),
+    [],
+  );
+  const visibleTikToks = useMemo(() => tikTokEmbeds.slice(0, visibleCount), [tikTokEmbeds, visibleCount]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -73,14 +109,6 @@ export default function WillysAutoVideos() {
   }, []);
 
   const homeBase = import.meta.env.BASE_URL;
-
-  const prevTikTok = () => {
-    setTikTokIndex((prev) => (prev - 1 + TIKTOK_VIDEO_URLS.length) % TIKTOK_VIDEO_URLS.length);
-  };
-
-  const nextTikTok = () => {
-    setTikTokIndex((prev) => (prev + 1) % TIKTOK_VIDEO_URLS.length);
-  };
 
   return (
     <div className="min-h-screen bg-[#F8F5F0] text-[#1A3320]">
@@ -98,6 +126,7 @@ export default function WillysAutoVideos() {
             <a href={`${homeBase}#about`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">About</a>
             <a href={`${homeBase}#reviews`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Reviews</a>
             <a href={`${homeBase}#contact`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Contact</a>
+            <a href={`${homeBase}staff`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Staff</a>
             <a href={`${homeBase}videos`} className="font-medium text-[#C9913A]">Videos</a>
           </div>
           <button
@@ -121,89 +150,38 @@ export default function WillysAutoVideos() {
             <a href={`${homeBase}#about`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">About</a>
             <a href={`${homeBase}#reviews`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Reviews</a>
             <a href={`${homeBase}#contact`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Contact</a>
+            <a href={`${homeBase}staff`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Staff</a>
             <a href={`${homeBase}videos`} className="block py-2 font-medium text-[#C9913A]">Videos</a>
           </div>
         )}
       </nav>
 
       <section className="px-6 pt-28 pb-8">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <div className="max-w-6xl mx-auto space-y-8">
           <article className="rounded-xl border border-[#1A3320]/10 bg-white p-4 md:p-5 shadow-sm">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
               <div>
                 <p className="text-sm text-[#1A3320]/70">TikTok</p>
                 <p className="font-semibold">@willysauto664</p>
               </div>
-              <div className="flex items-center gap-3">
-                <span className="text-sm text-[#1A3320]/70">{tikTokIndex + 1}/{TIKTOK_VIDEO_URLS.length}</span>
-                <div className="flex gap-2">
-                  <IconButton label="Previous TikTok" onClick={prevTikTok}>←</IconButton>
-                  <IconButton label="Next TikTok" onClick={nextTikTok}>→</IconButton>
-                </div>
+              <span className="text-sm text-[#1A3320]/70">{tikTokEmbeds.length} videos</span>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+              {visibleTikToks.map((video) => (
+                <TikTokCard key={video.id} video={video} />
+              ))}
+            </div>
+            {visibleCount < tikTokEmbeds.length && (
+              <div className="mt-6 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setVisibleCount((count) => Math.min(count + 4, tikTokEmbeds.length))}
+                  className="inline-flex items-center justify-center rounded border border-[#C9913A] px-5 py-2 font-semibold text-[#C9913A] hover:bg-[#C9913A] hover:text-[#1A3320] transition-colors"
+                >
+                  Load more videos
+                </button>
               </div>
-            </div>
-
-            <div className="rounded-lg border border-[#1A3320]/10 overflow-hidden bg-[#1A3320]/5">
-              {currentTikTokEmbedUrl ? (
-                <iframe
-                  key={currentTikTokId}
-                  title={`TikTok video ${currentTikTokId}`}
-                  src={currentTikTokEmbedUrl}
-                  width="100%"
-                  height="100%"
-                  className="h-[520px] md:h-[760px]"
-                  loading="lazy"
-                  style={{ border: 'none' }}
-                  allow="autoplay; encrypted-media; picture-in-picture"
-                  allowFullScreen
-                />
-              ) : (
-                <div className="h-[420px] flex items-center justify-center text-[#1A3320]/70">Unable to load TikTok video.</div>
-              )}
-            </div>
-
-            <div className="mt-4 flex flex-wrap gap-3 justify-end">
-              <a
-                href={currentTikTokUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center rounded border border-[#C9913A] px-4 py-2 font-semibold text-[#C9913A] hover:bg-[#C9913A] hover:text-[#1A3320] transition-colors"
-              >
-                Open current TikTok
-              </a>
-            </div>
-          </article>
-
-          <article className="rounded-xl border border-[#1A3320]/10 bg-white p-4 md:p-5 shadow-sm">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
-              <div>
-                <p className="text-sm text-[#1A3320]/70">Facebook</p>
-                <p className="font-semibold">bestmechanicintown</p>
-              </div>
-              <a
-                href={FACEBOOK_PAGE_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center rounded border border-[#C9913A] px-4 py-2 font-semibold text-[#C9913A] hover:bg-[#C9913A] hover:text-[#1A3320] transition-colors"
-              >
-                Open page
-              </a>
-            </div>
-
-            <div className="rounded-lg border border-[#1A3320]/10 overflow-hidden bg-[#1A3320]/5">
-              <iframe
-                title="Facebook Page Feed"
-                src={facebookFeedUrl}
-                width="100%"
-                height="100%"
-                className="h-[520px] md:h-[760px]"
-                loading="lazy"
-                style={{ border: 'none', overflow: 'hidden' }}
-                scrolling="no"
-                frameBorder="0"
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-              />
-            </div>
+            )}
           </article>
         </div>
       </section>

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+const FACEBOOK_PAGE_URL = 'https://www.facebook.com/bestmechanicintown/';
+
 const SERVICES = [
   'Engine diagnostics and repair',
   'Transmission service and repair',
@@ -70,6 +72,9 @@ export default function WillysAutoPrototype() {
   const navLinks = ['Services', 'About', 'Reviews', 'Contact'];
   const handleNavClick = () => setMobileMenuOpen(false);
   const basePath = import.meta.env.BASE_URL;
+  const facebookFeedUrl = `https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(
+    FACEBOOK_PAGE_URL,
+  )}&tabs=timeline&width=500&height=620&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true`;
 
   return (
     <div className="min-h-screen bg-[#F8F5F0] text-[#1A3320]">
@@ -93,6 +98,12 @@ export default function WillysAutoPrototype() {
                 {item}
               </a>
             ))}
+            <a
+              href={`${basePath}staff`}
+              className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors"
+            >
+              Staff
+            </a>
             <a
               href={`${basePath}videos`}
               className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors"
@@ -129,6 +140,13 @@ export default function WillysAutoPrototype() {
                 {item}
               </a>
             ))}
+            <a
+              href={`${basePath}staff`}
+              onClick={handleNavClick}
+              className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors"
+            >
+              Staff
+            </a>
             <a
               href={`${basePath}videos`}
               onClick={handleNavClick}
@@ -315,6 +333,32 @@ export default function WillysAutoPrototype() {
             <p className="font-semibold mb-2">Hours</p>
             <p>Mon–Fri 8:30am–5:30pm</p>
             <p>Sat–Sun closed</p>
+          </div>
+          <div className="mb-8 rounded-xl border border-[#C9913A]/30 bg-[#0F2D2D] p-4 md:p-5">
+            <div className="rounded-lg border border-[#C9913A]/25 overflow-hidden">
+              <iframe
+                title="Willy's Auto Facebook Feed"
+                src={facebookFeedUrl}
+                width="100%"
+                height="100%"
+                className="h-[500px] md:h-[620px]"
+                loading="lazy"
+                style={{ border: 'none', overflow: 'hidden' }}
+                scrolling="no"
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              />
+            </div>
+            <div className="mt-3">
+              <a
+                href={FACEBOOK_PAGE_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="text-[#C9913A] font-semibold hover:underline"
+              >
+                View Facebook page
+              </a>
+            </div>
           </div>
           <p className="text-[#F8F5F0]/80">
             Call for an appointment. We'll get you in.
