@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import TikTokGallery from './components/TikTokGallery.jsx';
 
 const SERVICES = [
   'Engine diagnostics and repair',
@@ -68,14 +67,9 @@ export default function WillysAutoPrototype() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navLinks = [
-    { label: 'Services', href: '#services' },
-    { label: 'About', href: '#about' },
-    { label: 'Reviews', href: '#reviews' },
-    { label: 'Videos', href: '#tiktok-gallery' },
-    { label: 'Contact', href: '#contact' },
-  ];
+  const navLinks = ['Services', 'About', 'Reviews', 'Contact'];
   const handleNavClick = () => setMobileMenuOpen(false);
+  const basePath = import.meta.env.BASE_URL;
 
   return (
     <div className="min-h-screen bg-[#F8F5F0] text-[#1A3320]">
@@ -92,13 +86,19 @@ export default function WillysAutoPrototype() {
           <div className="hidden md:flex gap-8">
             {navLinks.map((item) => (
               <a
-                key={item.label}
-                href={item.href}
+                key={item}
+                href={`#${item.toLowerCase()}`}
                 className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors"
               >
-                {item.label}
+                {item}
               </a>
             ))}
+            <a
+              href={`${basePath}videos`}
+              className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors"
+            >
+              Videos
+            </a>
           </div>
           {/* Mobile menu button */}
           <button
@@ -121,14 +121,21 @@ export default function WillysAutoPrototype() {
           <div className="md:hidden bg-[#1A3320] border-t border-[#C9913A]/30 px-6 py-4">
             {navLinks.map((item) => (
               <a
-                key={item.label}
-                href={item.href}
+                key={item}
+                href={`#${item.toLowerCase()}`}
                 onClick={handleNavClick}
                 className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors"
               >
-                {item.label}
+                {item}
               </a>
             ))}
+            <a
+              href={`${basePath}videos`}
+              onClick={handleNavClick}
+              className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors"
+            >
+              Videos
+            </a>
           </div>
         )}
       </nav>
@@ -287,8 +294,6 @@ export default function WillysAutoPrototype() {
           </div>
         </div>
       </section>
-
-      <TikTokGallery />
 
       {/* Contact / Footer */}
       <footer id="contact" className="py-16 px-6 bg-[#1A3320] text-[#F8F5F0]">
