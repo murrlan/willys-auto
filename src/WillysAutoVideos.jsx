@@ -42,15 +42,12 @@ function buildFacebookPluginUrl(tab) {
   return `https://www.facebook.com/plugins/page.php?href=${encodedPage}&tabs=${tab}&width=500&height=700&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true`;
 }
 
-function CarouselFrame({ title, subtitle, countLabel, children, onPrev, onNext }) {
+function TikTokFrame({ countLabel, children, onPrev, onNext }) {
   return (
     <section className="px-6 py-8">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1A3320]">{title}</h2>
-            <p className="text-[#1A3320]/80 mt-2">{subtitle}</p>
-          </div>
+        <div className="mb-5 flex items-end justify-between gap-3">
+          <p className="text-[#1A3320]/80">@willysauto664</p>
           <div className="flex items-center gap-4">
             <span className="text-sm text-[#1A3320]/70">{countLabel}</span>
             <div className="flex gap-2">
@@ -80,7 +77,7 @@ function CarouselFrame({ title, subtitle, countLabel, children, onPrev, onNext }
   );
 }
 
-function TikTokSlide({ url, showEmbed, onPlay }) {
+function TikTokSlide({ url }) {
   const videoId = extractVideoId(url);
 
   if (!videoId) {
@@ -88,96 +85,51 @@ function TikTokSlide({ url, showEmbed, onPlay }) {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
-      <div className="rounded-lg bg-[#1A3320] text-[#F8F5F0] p-6 min-h-[420px] flex flex-col justify-between">
-        <div>
-          <p className="text-[#C9913A] font-semibold mb-3">TikTok</p>
-          <h3 className="text-2xl font-bold mb-3">@willysauto664</h3>
-          <p className="text-[#F8F5F0]/85 break-all text-sm">{url}</p>
-        </div>
-        <div className="flex flex-wrap gap-3 mt-6">
-          {!showEmbed && (
-            <button
-              type="button"
-              onClick={onPlay}
-              className="inline-flex items-center justify-center px-4 py-2 bg-[#C9913A] text-[#1A3320] font-semibold rounded hover:bg-[#d9a650] transition-colors"
-            >
-              Play Here
-            </button>
-          )}
-          <a
-            href={url}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center px-4 py-2 border border-[#C9913A] text-[#C9913A] font-semibold rounded hover:bg-[#C9913A] hover:text-[#1A3320] transition-colors"
-          >
-            Open on TikTok
-          </a>
-        </div>
-      </div>
-
+    <div className="space-y-4">
       <div className="rounded-lg bg-white border border-[#1A3320]/10 p-2 min-h-[420px] flex items-center justify-center">
-        {showEmbed ? (
-          <blockquote className="tiktok-embed" cite={url} data-video-id={videoId}>
-            <section />
-          </blockquote>
-        ) : (
-          <div className="w-full h-full min-h-[400px] rounded bg-[#1A3320] text-[#F8F5F0]/80 flex items-center justify-center text-center px-4">
-            Click <span className="mx-1 font-semibold text-[#C9913A]">Play Here</span> to load this video.
-          </div>
-        )}
+        <blockquote key={videoId} className="tiktok-embed" cite={url} data-video-id={videoId}>
+          <section />
+        </blockquote>
+      </div>
+      <div className="flex justify-center">
+        <a
+          href={url}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center justify-center px-4 py-2 border border-[#C9913A] text-[#C9913A] font-semibold rounded hover:bg-[#C9913A] hover:text-[#1A3320] transition-colors"
+        >
+          Open on TikTok
+        </a>
       </div>
     </div>
   );
 }
 
-function FacebookSlide({ pluginUrl, title, showEmbed, onPlay }) {
+function FacebookFeed({ pluginUrl }) {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
-      <div className="rounded-lg bg-[#0F2D2D] text-[#F8F5F0] p-6 min-h-[420px] flex flex-col justify-between">
-        <div>
-          <p className="text-[#C9913A] font-semibold mb-3">Facebook</p>
-          <h3 className="text-2xl font-bold mb-3">{title}</h3>
-          <p className="text-[#F8F5F0]/85 text-sm">bestmechanicintown</p>
-        </div>
-        <div className="flex flex-wrap gap-3 mt-6">
-          {!showEmbed && (
-            <button
-              type="button"
-              onClick={onPlay}
-              className="inline-flex items-center justify-center px-4 py-2 bg-[#C9913A] text-[#1A3320] font-semibold rounded hover:bg-[#d9a650] transition-colors"
-            >
-              Load Feed
-            </button>
-          )}
-          <a
-            href={FACEBOOK_PAGE_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center px-4 py-2 border border-[#C9913A] text-[#C9913A] font-semibold rounded hover:bg-[#C9913A] hover:text-[#1A3320] transition-colors"
-          >
-            Open on Facebook
-          </a>
-        </div>
-      </div>
-
+    <div className="space-y-4">
       <div className="rounded-lg bg-white border border-[#1A3320]/10 p-2 min-h-[420px] flex items-center justify-center">
-        {showEmbed ? (
-          <iframe
-            title={`Facebook ${title}`}
-            src={pluginUrl}
-            width="100%"
-            height="700"
-            style={{ border: 'none', overflow: 'hidden', borderRadius: '0.5rem' }}
-            scrolling="no"
-            frameBorder="0"
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-          />
-        ) : (
-          <div className="w-full h-full min-h-[400px] rounded bg-[#0F2D2D] text-[#F8F5F0]/80 flex items-center justify-center text-center px-4">
-            Click <span className="mx-1 font-semibold text-[#C9913A]">Load Feed</span> to display Facebook content.
-          </div>
-        )}
+        <iframe
+          title="Facebook Page Feed"
+          src={pluginUrl}
+          width="100%"
+          height="700"
+          loading="lazy"
+          style={{ border: 'none', overflow: 'hidden', borderRadius: '0.5rem' }}
+          scrolling="no"
+          frameBorder="0"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        />
+      </div>
+      <div className="flex justify-center">
+        <a
+          href={FACEBOOK_PAGE_URL}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center justify-center px-4 py-2 border border-[#C9913A] text-[#C9913A] font-semibold rounded hover:bg-[#C9913A] hover:text-[#1A3320] transition-colors"
+        >
+          Open on Facebook
+        </a>
       </div>
     </div>
   );
@@ -186,21 +138,9 @@ function FacebookSlide({ pluginUrl, title, showEmbed, onPlay }) {
 export default function WillysAutoVideos() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const [tikTokIndex, setTikTokIndex] = useState(0);
-  const [activeTikTokEmbedIndex, setActiveTikTokEmbedIndex] = useState(null);
 
-  const [facebookIndex, setFacebookIndex] = useState(0);
-  const [activeFacebookEmbedIndex, setActiveFacebookEmbedIndex] = useState(null);
-
-  const facebookSlides = useMemo(
-    () => [
-      { title: 'Timeline', pluginUrl: buildFacebookPluginUrl('timeline') },
-      { title: 'Videos', pluginUrl: buildFacebookPluginUrl('videos') },
-      { title: 'Page Feed', pluginUrl: buildFacebookPluginUrl('timeline,videos') },
-    ],
-    [],
-  );
+  const facebookFeedUrl = useMemo(() => buildFacebookPluginUrl('timeline,videos'), []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -209,45 +149,34 @@ export default function WillysAutoVideos() {
   }, []);
 
   useEffect(() => {
-    if (activeTikTokEmbedIndex === null) {
-      return;
-    }
+    const triggerTikTokLoad = () => {
+      if (window.tiktokEmbedLoad) {
+        window.tiktokEmbedLoad();
+      } else if (window.TikTok?.embed?.load) {
+        window.TikTok.embed.load();
+      }
+    };
 
     if (!document.querySelector('script[src="https://www.tiktok.com/embed.js"]')) {
       const script = document.createElement('script');
       script.async = true;
       script.src = 'https://www.tiktok.com/embed.js';
+      script.onload = triggerTikTokLoad;
       document.body.appendChild(script);
       return;
     }
 
-    if (window.tiktokEmbedLoad) {
-      window.tiktokEmbedLoad();
-    } else if (window.TikTok?.embed?.load) {
-      window.TikTok.embed.load();
-    }
-  }, [activeTikTokEmbedIndex]);
+    window.setTimeout(triggerTikTokLoad, 0);
+  }, [tikTokIndex]);
 
   const homeBase = import.meta.env.BASE_URL;
 
   const prevTikTok = () => {
     setTikTokIndex((prev) => (prev - 1 + TIKTOK_VIDEO_URLS.length) % TIKTOK_VIDEO_URLS.length);
-    setActiveTikTokEmbedIndex(null);
   };
 
   const nextTikTok = () => {
     setTikTokIndex((prev) => (prev + 1) % TIKTOK_VIDEO_URLS.length);
-    setActiveTikTokEmbedIndex(null);
-  };
-
-  const prevFacebook = () => {
-    setFacebookIndex((prev) => (prev - 1 + facebookSlides.length) % facebookSlides.length);
-    setActiveFacebookEmbedIndex(null);
-  };
-
-  const nextFacebook = () => {
-    setFacebookIndex((prev) => (prev + 1) % facebookSlides.length);
-    setActiveFacebookEmbedIndex(null);
   };
 
   return (
@@ -297,40 +226,28 @@ export default function WillysAutoVideos() {
       <section className="px-6 pt-28 pb-12 bg-[#1A3320] text-[#F8F5F0]">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Willy's Auto Social Videos</h1>
-          <p className="text-lg text-[#F8F5F0]/85 max-w-3xl">
-            Performance-optimized carousels: one active media embed at a time.
-          </p>
+          <p className="text-lg text-[#F8F5F0]/85 max-w-3xl">Performance-optimized embeds with seamless switching.</p>
         </div>
       </section>
 
-      <CarouselFrame
-        title="TikTok Carousel"
-        subtitle="Recent videos from @willysauto664"
+      <TikTokFrame
         countLabel={`${tikTokIndex + 1} / ${TIKTOK_VIDEO_URLS.length}`}
         onPrev={prevTikTok}
         onNext={nextTikTok}
       >
-        <TikTokSlide
-          url={TIKTOK_VIDEO_URLS[tikTokIndex]}
-          showEmbed={activeTikTokEmbedIndex === tikTokIndex}
-          onPlay={() => setActiveTikTokEmbedIndex(tikTokIndex)}
-        />
-      </CarouselFrame>
+        <TikTokSlide key={TIKTOK_VIDEO_URLS[tikTokIndex]} url={TIKTOK_VIDEO_URLS[tikTokIndex]} />
+      </TikTokFrame>
 
-      <CarouselFrame
-        title="Facebook Carousel"
-        subtitle="Content from bestmechanicintown"
-        countLabel={`${facebookIndex + 1} / ${facebookSlides.length}`}
-        onPrev={prevFacebook}
-        onNext={nextFacebook}
-      >
-        <FacebookSlide
-          title={facebookSlides[facebookIndex].title}
-          pluginUrl={facebookSlides[facebookIndex].pluginUrl}
-          showEmbed={activeFacebookEmbedIndex === facebookIndex}
-          onPlay={() => setActiveFacebookEmbedIndex(facebookIndex)}
-        />
-      </CarouselFrame>
+      <section className="px-6 py-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-5">
+            <p className="text-[#1A3320]/80">bestmechanicintown</p>
+          </div>
+          <div className="rounded-lg bg-white border border-[#1A3320]/10 p-4 md:p-6">
+            <FacebookFeed pluginUrl={facebookFeedUrl} />
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
