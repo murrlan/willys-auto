@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Willy's Auto storefront placeholder</title>
+  <desc id="desc">Branded placeholder image for Willy's Auto hero section.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F2D2D" />
+      <stop offset="100%" stop-color="#1A3320" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)" />
+  <rect x="80" y="80" width="1040" height="740" rx="20" fill="none" stroke="#C9913A" stroke-opacity="0.45" stroke-width="6" />
+  <text x="120" y="710" fill="#F8F5F0" font-family="Barlow, Arial, sans-serif" font-size="42" font-weight="700">
+    Willy's Auto
+  </text>
+  <text x="120" y="760" fill="#F8F5F0" fill-opacity="0.88" font-family="Barlow, Arial, sans-serif" font-size="28">
+    Serving Missoula drivers since 2003
+  </text>
+</svg>
