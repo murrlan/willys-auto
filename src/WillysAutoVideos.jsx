@@ -118,8 +118,12 @@ export default function WillysAutoVideos() {
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href={homeBase} className="text-2xl font-bold text-[#F8F5F0] hover:text-[#C9913A] transition-colors">
-            Willy's Auto
+          <a href={homeBase} className="flex items-center gap-3 hover:text-[#C9913A] transition-colors">
+            <img
+              src={`${homeBase}willysauto.png`}
+              alt="Willy's Auto"
+              className="h-[3.25rem] md:h-[3.75rem] w-auto object-contain"
+            />
           </a>
           <div className="hidden md:flex gap-8">
             <a href={`${homeBase}#services`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Services</a>
@@ -158,6 +162,9 @@ export default function WillysAutoVideos() {
 
       <section className="px-6 pt-28 pb-8">
         <div className="max-w-6xl mx-auto space-y-8">
+          <div>
+            <h1 className="text-3xl md:text-4xl font-bold text-[#1A3320]">Our Work</h1>
+          </div>
           <article className="rounded-xl border border-[#1A3320]/10 bg-white p-4 md:p-5 shadow-sm">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
               <div>

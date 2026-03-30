@@ -85,8 +85,12 @@ export default function WillysAutoPrototype() {
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="#hero" className="text-2xl font-bold text-[#F8F5F0] hover:text-[#C9913A] transition-colors">
-            Willy's Auto
+          <a href="#hero" className="flex items-center gap-3 hover:text-[#C9913A] transition-colors">
+            <img
+              src={`${import.meta.env.BASE_URL}willysauto.png`}
+              alt="Willy's Auto"
+              className="h-[3.25rem] md:h-[3.75rem] w-auto object-contain"
+            />
           </a>
           <div className="hidden md:flex gap-8">
             {navLinks.map((item) => (
@@ -319,7 +323,13 @@ export default function WillysAutoPrototype() {
       {/* Contact / Footer */}
       <footer id="contact" className="py-16 px-6 bg-[#1A3320] text-[#F8F5F0]">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl font-bold mb-8">Willy's Auto</h2>
+          <h2 className="mb-8 flex justify-center">
+            <img
+              src={`${import.meta.env.BASE_URL}willysauto.png`}
+              alt="Willy's Auto"
+              className="h-[3.75rem] md:h-[4.25rem] w-auto object-contain"
+            />
+          </h2>
           <div className="space-y-2 mb-8">
             <p>721 Mount Ave, Suite A</p>
             <p>Missoula, MT 59801</p>
