@@ -69,7 +69,7 @@ export default function WillysAutoPrototype() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navLinks = ['Services', 'About', 'Reviews', 'Contact'];
+  const navLinks = ['Services', 'Reviews', 'About', 'Contact'];
   const handleNavClick = () => setMobileMenuOpen(false);
   const basePath = import.meta.env.BASE_URL;
   const facebookFeedUrl = `https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(
@@ -84,12 +84,15 @@ export default function WillysAutoPrototype() {
           scrolled ? 'bg-[#1A3320]/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="#hero" className="flex items-center gap-3 hover:text-[#C9913A] transition-colors">
+        <div className="max-w-6xl mx-auto px-6 py-2 flex items-center justify-between">
+          <a
+            href="#hero"
+            className="flex items-center gap-3 pr-3 md:pr-5 hover:text-[#C9913A] transition-colors"
+          >
             <img
               src={`${import.meta.env.BASE_URL}willysauto.png`}
               alt="Willy's Auto"
-              className="h-[3.25rem] md:h-[3.75rem] w-auto object-contain"
+              className="h-[4rem] md:h-[4.75rem] w-auto origin-left scale-[1.38] object-contain"
             />
           </a>
           <div className="hidden md:flex gap-8">
@@ -327,7 +330,7 @@ export default function WillysAutoPrototype() {
             <img
               src={`${import.meta.env.BASE_URL}willysauto.png`}
               alt="Willy's Auto"
-              className="h-[3.75rem] md:h-[4.25rem] w-auto object-contain"
+              className="h-[4.75rem] md:h-[5.5rem] w-auto object-contain"
             />
           </h2>
           <div className="space-y-2 mb-8">

@@ -75,21 +75,24 @@ export default function WillysAutoStaff() {
           scrolled ? 'bg-[#1A3320]/95 backdrop-blur-sm shadow-lg' : 'bg-[#1A3320]'
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href={homeBase} className="flex items-center gap-3 hover:text-[#C9913A] transition-colors">
+        <div className="max-w-6xl mx-auto px-6 py-2 flex items-center justify-between">
+          <a
+            href={homeBase}
+            className="flex items-center gap-3 pr-3 md:pr-5 hover:text-[#C9913A] transition-colors"
+          >
             <img
               src={`${homeBase}willysauto.png`}
               alt="Willy's Auto"
-              className="h-[3.25rem] md:h-[3.75rem] w-auto object-contain"
+              className="h-[4rem] md:h-[4.75rem] w-auto origin-left scale-[1.38] object-contain"
             />
           </a>
           <div className="hidden md:flex gap-8">
             <a href={`${homeBase}#services`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Services</a>
-            <a href={`${homeBase}#about`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">About</a>
             <a href={`${homeBase}#reviews`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Reviews</a>
+            <a href={`${homeBase}#about`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">About</a>
             <a href={`${homeBase}#contact`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Contact</a>
-            <a href={`${homeBase}videos`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">See Our Work</a>
             <a href={`${homeBase}staff`} className="font-medium text-[#C9913A]">Staff</a>
+            <a href={`${homeBase}videos`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">See Our Work</a>
           </div>
           <button
             type="button"
@@ -109,11 +112,11 @@ export default function WillysAutoStaff() {
         {mobileMenuOpen && (
           <div className="md:hidden bg-[#1A3320] border-t border-[#C9913A]/30 px-6 py-4">
             <a href={`${homeBase}#services`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Services</a>
-            <a href={`${homeBase}#about`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">About</a>
             <a href={`${homeBase}#reviews`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Reviews</a>
+            <a href={`${homeBase}#about`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">About</a>
             <a href={`${homeBase}#contact`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Contact</a>
-            <a href={`${homeBase}videos`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">See Our Work</a>
             <a href={`${homeBase}staff`} className="block py-2 font-medium text-[#C9913A]">Staff</a>
+            <a href={`${homeBase}videos`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">See Our Work</a>
           </div>
         )}
       </nav>
