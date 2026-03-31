@@ -88,7 +88,7 @@ export default function WillysAutoStaff() {
             <a href={`${homeBase}#about`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">About</a>
             <a href={`${homeBase}#reviews`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Reviews</a>
             <a href={`${homeBase}#contact`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Contact</a>
-            <a href={`${homeBase}videos`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Videos</a>
+            <a href={`${homeBase}videos`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">See Our Work</a>
             <a href={`${homeBase}staff`} className="font-medium text-[#C9913A]">Staff</a>
           </div>
           <button
@@ -112,7 +112,7 @@ export default function WillysAutoStaff() {
             <a href={`${homeBase}#about`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">About</a>
             <a href={`${homeBase}#reviews`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Reviews</a>
             <a href={`${homeBase}#contact`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Contact</a>
-            <a href={`${homeBase}videos`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Videos</a>
+            <a href={`${homeBase}videos`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">See Our Work</a>
             <a href={`${homeBase}staff`} className="block py-2 font-medium text-[#C9913A]">Staff</a>
           </div>
         )}

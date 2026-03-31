@@ -112,7 +112,7 @@ export default function WillysAutoPrototype() {
               href={`${basePath}videos`}
               className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors"
             >
-              Videos
+              See Our Work
             </a>
           </div>
           {/* Mobile menu button */}
@@ -156,7 +156,7 @@ export default function WillysAutoPrototype() {
               onClick={handleNavClick}
               className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors"
             >
-              Videos
+              See Our Work
             </a>
           </div>
         )}
@@ -170,10 +170,10 @@ export default function WillysAutoPrototype() {
         <div className="max-w-6xl mx-auto w-full flex flex-col lg:flex-row items-center gap-10 lg:gap-12">
           <div className="flex-1 text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              20+ years in Missoula. Zero advertising.
+              20+ years in Missoula
             </h1>
             <p className="text-xl md:text-2xl text-[#F8F5F0]/90 mb-4">
-              We grew entirely by word of mouth because we do something simple: we never charge you for what you don't need.
+              We grew by word of mouth because we do something simple: we never charge you for what you don't need.
             </p>
             <p className="text-lg text-[#F8F5F0]/80 mb-10">
               That's it. Honest communication, honest work. Missoula trusted us long before we had a website.
@@ -311,10 +311,10 @@ export default function WillysAutoPrototype() {
               Jason "Willy" Williams founded Willy's Auto in 2003 and has grown it purely by reputation. Emily runs the front desk and keeps you in the loop; Bryce handles the wrench work. Both show up in reviews by name because that's the kind of shop this is: real people, real communication.
             </p>
             <p>
-              We have a simple policy: we'll take you into the shop and show you exactly what needs doing and why. No mystery, no pressure. If it doesn't need fixing, we won't charge you for it.
+              We have a simple policy: we'll take you into the shop and show you exactly what needs doing and why. If it doesn't need fixing, we won't charge you for it.
             </p>
             <p>
-              Beyond general repair, we also do custom fabrication and hot rod work which sets us apart from most shops in town. All makes and models, foreign and domestic. Winner of Best in Missoula. Still just one owner on the floor, same as day one.
+              Beyond general repair, we also do custom fabrication and hot rod work which sets us apart from most shops in town. All makes and models, foreign and domestic. Winner of Best in Missoula.
             </p>
           </div>
         </div>

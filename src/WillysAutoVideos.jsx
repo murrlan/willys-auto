@@ -108,6 +108,14 @@ export default function WillysAutoVideos() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    const previousTitle = document.title;
+    document.title = "See Our Work | Willy's Auto";
+    return () => {
+      document.title = previousTitle;
+    };
+  }, []);
+
   const homeBase = import.meta.env.BASE_URL;
 
   return (
@@ -131,7 +139,7 @@ export default function WillysAutoVideos() {
             <a href={`${homeBase}#reviews`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Reviews</a>
             <a href={`${homeBase}#contact`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Contact</a>
             <a href={`${homeBase}staff`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Staff</a>
-            <a href={`${homeBase}videos`} className="font-medium text-[#C9913A]">Videos</a>
+            <a href={`${homeBase}videos`} className="font-medium text-[#C9913A]">See Our Work</a>
           </div>
           <button
             type="button"
@@ -155,7 +163,7 @@ export default function WillysAutoVideos() {
             <a href={`${homeBase}#reviews`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Reviews</a>
             <a href={`${homeBase}#contact`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Contact</a>
             <a href={`${homeBase}staff`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Staff</a>
-            <a href={`${homeBase}videos`} className="block py-2 font-medium text-[#C9913A]">Videos</a>
+            <a href={`${homeBase}videos`} className="block py-2 font-medium text-[#C9913A]">See Our Work</a>
           </div>
         )}
       </nav>
@@ -163,13 +171,20 @@ export default function WillysAutoVideos() {
       <section className="px-6 pt-28 pb-8">
         <div className="max-w-6xl mx-auto space-y-8">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold text-[#1A3320]">Our Work</h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-[#1A3320]">See Our Work</h1>
           </div>
           <article className="rounded-xl border border-[#1A3320]/10 bg-white p-4 md:p-5 shadow-sm">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
               <div>
                 <p className="text-sm text-[#1A3320]/70">TikTok</p>
-                <p className="font-semibold">@willysauto664</p>
+                <a
+                  href="https://www.tiktok.com/@willysauto664"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-[#1A3320] hover:text-[#C9913A] underline-offset-2 hover:underline"
+                >
+                  @willysauto664
+                </a>
               </div>
               <span className="text-sm text-[#1A3320]/70">{tikTokEmbeds.length} videos</span>
             </div>
