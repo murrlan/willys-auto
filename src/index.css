@@ -1,10 +1,13 @@
 @import "tailwindcss";
 
+/* Purple + orange: deep purple for structure, warm orange for energy & CTAs */
 @theme {
-  --color-forest: #1A3320;
-  --color-teal: #0F2D2D;
-  --color-accent: #C9913A;
-  --color-cream: #F8F5F0;
+  --color-brand-ink: #2a2045;
+  --color-brand-surface: #3d2e6b;
+  --color-brand-deep: #1f1638;
+  --color-brand-accent: #f97316;
+  --color-brand-accent-hover: #fb923c;
+  --color-brand-cream: #f7f4fc;
 }
 
 html {
@@ -13,5 +16,5 @@ html {
 
 body {
   font-family: 'Barlow', system-ui, sans-serif;
-  background-color: var(--color-cream);
+  background-color: var(--color-brand-cream);
 }

@@ -60,7 +60,7 @@ function TikTokCard({ video }) {
   }, [shouldLoad]);
 
   return (
-    <div ref={cardRef} className="rounded-lg border border-[#1A3320]/10 overflow-hidden bg-[#1A3320]/5">
+    <div ref={cardRef} className="rounded-lg border border-brand-ink/10 overflow-hidden bg-brand-ink/5">
       {shouldLoad ? (
         <iframe
           title={`TikTok video ${video.id}`}
@@ -74,16 +74,16 @@ function TikTokCard({ video }) {
           allowFullScreen
         />
       ) : (
-        <div className="h-[520px] flex items-center justify-center text-[#1A3320]/70 bg-white">
+        <div className="h-[520px] flex items-center justify-center text-brand-ink/70 bg-white">
           Loading video...
         </div>
       )}
-      <div className="px-3 py-2 bg-white border-t border-[#1A3320]/10">
+      <div className="px-3 py-2 bg-white border-t border-brand-ink/10">
         <a
           href={video.url}
           target="_blank"
           rel="noreferrer"
-          className="text-sm font-semibold text-[#1A3320] hover:text-[#C9913A] transition-colors"
+          className="text-sm font-semibold text-brand-ink hover:text-brand-accent transition-colors"
         >
           Open on TikTok
         </a>
@@ -119,16 +119,16 @@ export default function WillysAutoVideos() {
   const homeBase = import.meta.env.BASE_URL;
 
   return (
-    <div className="min-h-screen bg-[#F8F5F0] text-[#1A3320]">
+    <div className="min-h-screen bg-brand-cream text-brand-ink">
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-[#1A3320]/95 backdrop-blur-sm shadow-lg' : 'bg-[#1A3320]'
+          scrolled ? 'bg-brand-surface/95 backdrop-blur-sm shadow-lg' : 'bg-brand-surface'
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 py-2 flex items-center justify-between">
           <a
             href={homeBase}
-            className="flex items-center gap-3 pr-3 md:pr-5 hover:text-[#C9913A] transition-colors"
+            className="flex items-center gap-3 pr-3 md:pr-5 hover:text-brand-accent transition-colors"
           >
             <img
               src={`${homeBase}willysauto.png`}
@@ -137,17 +137,17 @@ export default function WillysAutoVideos() {
             />
           </a>
           <div className="hidden md:flex gap-8">
-            <a href={`${homeBase}#services`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Services</a>
-            <a href={`${homeBase}#reviews`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Reviews</a>
-            <a href={`${homeBase}#about`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">About</a>
-            <a href={`${homeBase}#contact`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Contact</a>
-            <a href={`${homeBase}staff`} className="font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Staff</a>
-            <a href={`${homeBase}videos`} className="font-medium text-[#C9913A]">See Our Work</a>
+            <a href={`${homeBase}#services`} className="font-medium text-brand-cream hover:text-brand-accent transition-colors">Services</a>
+            <a href={`${homeBase}#reviews`} className="font-medium text-brand-cream hover:text-brand-accent transition-colors">Reviews</a>
+            <a href={`${homeBase}#about`} className="font-medium text-brand-cream hover:text-brand-accent transition-colors">About</a>
+            <a href={`${homeBase}#contact`} className="font-medium text-brand-cream hover:text-brand-accent transition-colors">Contact</a>
+            <a href={`${homeBase}staff`} className="font-medium text-brand-cream hover:text-brand-accent transition-colors">Staff</a>
+            <a href={`${homeBase}videos`} className="font-medium text-brand-accent">See Our Work</a>
           </div>
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-[#F8F5F0] hover:text-[#C9913A]"
+            className="md:hidden p-2 text-brand-cream hover:text-brand-accent"
             aria-label="Toggle menu"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -160,13 +160,13 @@ export default function WillysAutoVideos() {
           </button>
         </div>
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[#1A3320] border-t border-[#C9913A]/30 px-6 py-4">
-            <a href={`${homeBase}#services`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Services</a>
-            <a href={`${homeBase}#reviews`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Reviews</a>
-            <a href={`${homeBase}#about`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">About</a>
-            <a href={`${homeBase}#contact`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Contact</a>
-            <a href={`${homeBase}staff`} className="block py-2 font-medium text-[#F8F5F0] hover:text-[#C9913A] transition-colors">Staff</a>
-            <a href={`${homeBase}videos`} className="block py-2 font-medium text-[#C9913A]">See Our Work</a>
+          <div className="md:hidden bg-brand-surface border-t border-brand-accent/30 px-6 py-4">
+            <a href={`${homeBase}#services`} className="block py-2 font-medium text-brand-cream hover:text-brand-accent transition-colors">Services</a>
+            <a href={`${homeBase}#reviews`} className="block py-2 font-medium text-brand-cream hover:text-brand-accent transition-colors">Reviews</a>
+            <a href={`${homeBase}#about`} className="block py-2 font-medium text-brand-cream hover:text-brand-accent transition-colors">About</a>
+            <a href={`${homeBase}#contact`} className="block py-2 font-medium text-brand-cream hover:text-brand-accent transition-colors">Contact</a>
+            <a href={`${homeBase}staff`} className="block py-2 font-medium text-brand-cream hover:text-brand-accent transition-colors">Staff</a>
+            <a href={`${homeBase}videos`} className="block py-2 font-medium text-brand-accent">See Our Work</a>
           </div>
         )}
       </nav>
@@ -174,22 +174,22 @@ export default function WillysAutoVideos() {
       <section className="px-6 pt-28 pb-8">
         <div className="max-w-6xl mx-auto space-y-8">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold text-[#1A3320]">See Our Work</h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-brand-ink">See Our Work</h1>
           </div>
-          <article className="rounded-xl border border-[#1A3320]/10 bg-white p-4 md:p-5 shadow-sm">
+          <article className="rounded-xl border border-brand-ink/10 bg-white p-4 md:p-5 shadow-sm">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
               <div>
-                <p className="text-sm text-[#1A3320]/70">TikTok</p>
+                <p className="text-sm text-brand-ink/70">TikTok</p>
                 <a
                   href="https://www.tiktok.com/@willysauto664"
                   target="_blank"
                   rel="noreferrer"
-                  className="font-semibold text-[#1A3320] hover:text-[#C9913A] underline-offset-2 hover:underline"
+                  className="font-semibold text-brand-ink hover:text-brand-accent underline-offset-2 hover:underline"
                 >
                   @willysauto664
                 </a>
               </div>
-              <span className="text-sm text-[#1A3320]/70">{tikTokEmbeds.length} videos</span>
+              <span className="text-sm text-brand-ink/70">{tikTokEmbeds.length} videos</span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
               {visibleTikToks.map((video) => (
@@ -201,7 +201,7 @@ export default function WillysAutoVideos() {
                 <button
                   type="button"
                   onClick={() => setVisibleCount((count) => Math.min(count + 4, tikTokEmbeds.length))}
-                  className="inline-flex items-center justify-center rounded border border-[#C9913A] px-5 py-2 font-semibold text-[#C9913A] hover:bg-[#C9913A] hover:text-[#1A3320] transition-colors"
+                  className="inline-flex items-center justify-center rounded border border-brand-accent px-5 py-2 font-semibold text-brand-accent hover:bg-brand-accent hover:text-brand-ink transition-colors"
                 >
                   Load more videos
                 </button>
