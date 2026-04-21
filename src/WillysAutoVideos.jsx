@@ -38,6 +38,8 @@ function extractVideoId(url) {
 function TikTokCard({ video }) {
   const cardRef = useRef(null);
   const [shouldLoad, setShouldLoad] = useState(false);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [showFallback, setShowFallback] = useState(false);
 
   useEffect(() => {
     if (shouldLoad || !cardRef.current) {
@@ -59,20 +61,58 @@ function TikTokCard({ video }) {
     return () => observer.disconnect();
   }, [shouldLoad]);
 
+  useEffect(() => {
+    if (!shouldLoad || iframeLoaded) {
+      return;
+    }
+
+    const fallbackTimer = window.setTimeout(() => {
+      setShowFallback(true);
+    }, 4500);
+
+    return () => {
+      window.clearTimeout(fallbackTimer);
+    };
+  }, [shouldLoad, iframeLoaded]);
+
   return (
     <div ref={cardRef} className="rounded-lg border border-brand-ink/10 overflow-hidden bg-brand-ink/5">
       {shouldLoad ? (
-        <iframe
-          title={`TikTok video ${video.id}`}
-          src={`https://www.tiktok.com/embed/v2/${video.id}`}
-          width="100%"
-          height="100%"
-          className="h-[520px]"
-          loading="lazy"
-          style={{ border: 'none' }}
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowFullScreen
-        />
+        <div className="relative h-[520px] bg-white">
+          <iframe
+            title={`TikTok video ${video.id}`}
+            src={`https://www.tiktok.com/embed/v2/${video.id}`}
+            width="100%"
+            height="100%"
+            className="h-[520px]"
+            loading="lazy"
+            style={{ border: 'none' }}
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+            onLoad={() => {
+              setIframeLoaded(true);
+              setShowFallback(false);
+            }}
+            onError={() => {
+              setShowFallback(true);
+            }}
+          />
+          {showFallback && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center bg-white/95">
+              <p className="text-sm text-brand-ink/80">
+                Video embed did not load in this browser.
+              </p>
+              <a
+                href={video.url}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center rounded border border-brand-accent px-4 py-2 font-semibold text-brand-accent hover:bg-brand-accent hover:text-brand-ink transition-colors"
+              >
+                Watch on TikTok
+              </a>
+            </div>
+          )}
+        </div>
       ) : (
         <div className="h-[520px] flex items-center justify-center text-brand-ink/70 bg-white">
           Loading video...
