@@ -39,6 +39,7 @@ function TikTokCard({ video }) {
   const cardRef = useRef(null);
   const [shouldLoad, setShouldLoad] = useState(false);
   const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [showSlowLoadHint, setShowSlowLoadHint] = useState(false);
   const [showFallback, setShowFallback] = useState(false);
 
   useEffect(() => {
@@ -67,8 +68,8 @@ function TikTokCard({ video }) {
     }
 
     const fallbackTimer = window.setTimeout(() => {
-      setShowFallback(true);
-    }, 4500);
+      setShowSlowLoadHint(true);
+    }, 10000);
 
     return () => {
       window.clearTimeout(fallbackTimer);
@@ -119,14 +120,21 @@ function TikTokCard({ video }) {
         </div>
       )}
       <div className="px-3 py-2 bg-white border-t border-brand-ink/10">
-        <a
-          href={video.url}
-          target="_blank"
-          rel="noreferrer"
-          className="text-sm font-semibold text-brand-ink hover:text-brand-accent transition-colors"
-        >
-          Open on TikTok
-        </a>
+        <div className="flex items-center justify-between gap-3">
+          <a
+            href={video.url}
+            target="_blank"
+            rel="noreferrer"
+            className="text-sm font-semibold text-brand-ink hover:text-brand-accent transition-colors"
+          >
+            Open on TikTok
+          </a>
+          {showSlowLoadHint && !iframeLoaded && !showFallback && (
+            <span className="text-xs text-brand-ink/65">
+              Taking too long? Use the TikTok link.
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );
